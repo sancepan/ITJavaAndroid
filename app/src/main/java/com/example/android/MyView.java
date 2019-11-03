@@ -17,7 +17,7 @@ public class MyView extends View {
         Paint paint = new Paint();
         paint.setStrokeWidth(5);
         paint.setColor(Color.RED);
-        canvas.drawRect(190, 867, getHeight(), getHeight(), paint);
+        canvas.drawRect(190, 866, getHeight(), getHeight(), paint);
         paint.setColor(Color.GREEN);
         paint.setColor(Color.RED);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
