@@ -5,8 +5,27 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.View;
 
-
 public class MyView extends View {
+    // Возвращает псевдослучайное число
+    // в полуинтервале [min, max)
+    float rand(float min , float max){
+        return (float)(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Заполняет массив псевдослучайными числами в полуинтервале [min, max)
+    void fillRandom(float[] array , float min, float max){
+        for (int i = 0; i < array.length; i++){
+            array[i] = rand (min, max);
+        }
+    }
+
+    // Прибавляет  к элементам первого массива значения элеметов второго
+    // Массивы должны быть одинаковой длины!
+    void addValues(float[] array , float[] values){
+        for (int i = 0; i < array.length; i++){
+            array[i] += values[i];
+        }
+    }
 
     int N = 10; // количество шариков
     float[] x  = new float[N];
@@ -16,12 +35,10 @@ public class MyView extends View {
 
     public MyView(Context context) {
         super(context);
-        for (int i = 0; i < N; i++){
-            x[i] = (float)(Math.random() * 500);
-            y[i] = (float)(Math.random() * 500);
-            vx[i] = (float)(Math.random() * 6 - 3);
-            vy[i] = (float)(Math.random() * 6 - 3);
-        }
+        fillRandom(x, 0, 500);
+        fillRandom(y, 0, 500);
+        fillRandom(vx, -3, 3);
+        fillRandom(vy, -3, 3);
     }
 
     @Override
@@ -31,7 +48,7 @@ public class MyView extends View {
         // отрисовываем все линии
         for (int i = 0; i < N - 1; i++) {
 
-            canvas.drawLine(x[i], y[i], x[i + 1], y[i + 1], paint);
+            canvas.drawCircle(x[i], y[i], 20, paint);
 
         }
         // готовим массивы x и у для следущего кадра
@@ -42,8 +59,8 @@ public class MyView extends View {
             if (y[i] <= 0 || y[i] >= this.getHeight()){
                 vy[i] = - vy[i];
             }
-            x[i] += vx[i];
-            y[i] += vy[i];
+            addValues(x, vx);
+            addValues(y, vy);
         }
         //запрашиваем перерисовку
         invalidate();
