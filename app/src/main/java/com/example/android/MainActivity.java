@@ -1,10 +1,56 @@
 package com.example.android;
 
 import android.app.Activity;
+<<<<<<< HEAD
+=======
 import android.content.Context;
 import android.graphics.Color;
+>>>>>>> master
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
+<<<<<<< HEAD
+public class MainActivity extends Activity {
+    // Вызывается при создании Активности
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Инициализирует Активность.
+        setContentView(R.layout.activity_main);
+    }
+
+    /** Вызывается при нажатии пользователем на кнопку Решить */
+    public void solveEquation(View view) {
+        // ax+b=c
+        double a = Double.parseDouble( ((EditText)
+                findViewById(R.id.coefficient_a)).getText().toString());
+        double b = Double.parseDouble( ((EditText)
+                findViewById(R.id.coefficient_b)).getText().toString());
+        double c = Double.parseDouble( ((EditText)
+                findViewById(R.id.coefficient_c)).getText().toString());
+        TextView result = (TextView) findViewById(R.id.result);
+        if(a == 0 && b != 0){
+            result.setText("" + String.valueOf((-c / b) == -0 ? 0 : -c / b));
+        } else if (a == 0 && b == 0 && c != 0){
+            result.setText("" + String.valueOf("Нет корней"));
+        } else if (a == 0 && b == 0 && c == 0){
+            result.setText("" + String.valueOf("x может принимать любое значение"));
+        } else if (a != 0 && b == 0){
+            result.setText("" + String.valueOf(Math.sqrt(-c / a)) + "; " + -Math.sqrt(-c / a));
+        } else if(a != 0 && b != 0 && c == 0){
+            result.setText("" + String.valueOf(-b / a) + "; 0");
+        } else if (a != 0 && b != 0 && c != 0){
+            double d;
+            d = b*b - 4*a*c;
+            result.setText("" + String.valueOf((-b - Math.sqrt(d)) / (2*a) + "; " + (-b + Math.sqrt(d)) / (2*a)));
+        }
+        //result.setText("" + String.valueOf((c - b) / a));
+    }
+
+}
+=======
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -233,3 +279,4 @@ public class MainActivity extends Activity implements OnClickListener,
         return true;
     }
 }
+>>>>>>> master
